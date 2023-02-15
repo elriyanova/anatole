@@ -6,8 +6,7 @@
       {{ end }}
       {{- .Site.Params.author -}}
     {{ else }}
-      {{- .Site.Params.author -}}{{ with .Title }}
-        |
+      {{ with .Title }}
         {{ . }}
       {{ end }}
 
