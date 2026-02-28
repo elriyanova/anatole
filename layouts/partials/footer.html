@@ -3,10 +3,10 @@
     <li class="footer__item">
       &copy;
       {{ if isset .context.Site.Params "copyright" }}
-        {{ replace .context.Site.Params.copyright "{{ YEAR }}" (now.Format "2006") | markdownify }}
+        {{ replace .context.Site.Params.copyright "{{ YEAR }}" "<span class=\"js-current-year\"></span>" | markdownify }}
       {{ else }}
         {{ .context.Site.Params.author }}
-        {{ now.Format "2006" }}
+        <span class="js-current-year"></span>
       {{ end }}
     </li>
     {{ range .context.Site.Menus.footer }}
@@ -25,6 +25,15 @@
     {{ end }}
   </ul>
 </footer>
+<script>
+  (function () {
+    var year = new Date().getFullYear();
+    var yearNodes = document.querySelectorAll('.js-current-year');
+    for (var i = 0; i < yearNodes.length; i++) {
+      yearNodes[i].textContent = year;
+    }
+  })();
+</script>
 {{- partial "medium-zoom.html" .context -}}
 {{- partial "math.html" .context -}}
 {{- if (hasPrefix .context.Site.Config.Services.GoogleAnalytics.ID "G-") -}}
